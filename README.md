@@ -1,5 +1,9 @@
 # 24SUMR_Recommender-Algo
 
+[Squared L2 vs Inner product vs Cosine similarity](https://chatgpt.com/share/b286851e-3444-4a2b-9be2-355ef5b61016)
+
+Winner: Cosine Similarity
+
 ### May 28
 
 **Chroma and Ollama Exploration**
