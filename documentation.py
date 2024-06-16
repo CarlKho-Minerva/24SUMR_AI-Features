@@ -1,4 +1,6 @@
 # learning from https://blog.postman.com/how-to-build-an-api-in-python/
+# to run this file, use command: uvicorn documentation:app --reload
+# then go to http://localhost:8000/HTTP_Method_Name (not the functions) to see the output
 
 from fastapi import FastAPI
 

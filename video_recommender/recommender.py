@@ -11,6 +11,25 @@ queue = {}
 watched = {}
 
 
+def create_user_interest_dict(user_interests):
+    """
+    Create a dictionary with user interests and initial weights.
+
+    Parameters:
+    user_interests (list): List of user interests.
+
+    Returns:
+    dict: Dictionary of user interests and initial weights.
+    """
+    if not (4 <= len(user_interests) <= 8):
+        print("Invalid number of user interests provided.")
+        return {}
+
+    user_dict_interest = {interest_tag: 10 for interest_tag in user_interests}
+    debug_print(user_dict_interest, "create_user_interest_dict")
+    return user_dict_interest
+
+
 def get_interest_tag_for_recommendation(user_dict_interest):
     """
     Select an interest tag for recommendation based on user interest percentages.
@@ -37,25 +56,6 @@ def get_interest_tag_for_recommendation(user_dict_interest):
             print(f"Selected interest: {interest_tag}")
             return interest_tag
     return None
-
-
-def create_user_interest_dict(user_interests):
-    """
-    Create a dictionary with user interests and initial weights.
-
-    Parameters:
-    user_interests (list): List of user interests.
-
-    Returns:
-    dict: Dictionary of user interests and initial weights.
-    """
-    if not (4 <= len(user_interests) <= 8):
-        print("Invalid number of user interests provided.")
-        return {}
-
-    user_dict_interest = {interest_tag: 10 for interest_tag in user_interests}
-    debug_print(user_dict_interest, "create_user_interest_dict")
-    return user_dict_interest
 
 
 def mark_as_watched(video_id, title, watched_dict):
