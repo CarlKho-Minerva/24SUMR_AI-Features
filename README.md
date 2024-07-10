@@ -1,120 +1,52 @@
-# Video Recommender
+# Edgur Features Repository
 
-A personalized video recommendation algorithm utilizing user actions and interests, built with Python and ChromaDB for semantic search.
+This repository stores various features developed for Edgur, aimed at enhancing user experience and functionality.
 
-## Table of Contents
+### 1. Recommender Algorithm
 
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Setup](#setup)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+The recommender algorithm utilizes Pandas Chroma DB and a uniform probability approach to recommend videos based on user interests. Here's how it works:
 
-## Project Overview
+- **Initialization:** The algorithm initializes a queue for user interests, which includes topics ranging from a minimum of four to a maximum of eight.
+  
+- **Topic Weight Distribution:** Topic weights are distributed among each other to ensure each topic has its space in the partition.
+  
+- **Recommendation Generation:** Using a random number generator (`random.randint`), the algorithm selects a video based on the generated number.
 
-This project demonstrates a personalized video recommendation system that adjusts recommendations based on user interactions such as likes, shares, views, and loops. The project utilizes ChromaDB for embedding-based semantic search and OpenAI for generating embeddings.
+- **Interaction Tracking:** Upon user interaction with the recommended video, actions such as sharing and looping are observed. If a new tag is encountered, it's added to the user's interest dictionary.
 
-## Features
+- **Queue Management:** Videos are cached in advance to ensure they are readily available when users scroll rapidly, preventing loss from the queue.
 
-- User interest management with dynamic weighting
-- Action-based interest adjustment
-- Embedding-based video search using ChromaDB
-- Supports user interruptions and recommends relevant interests
+- **Chroma DB Integration:** Chroma DB handles the vector storage part, utilizing OpenAI's embedding model (specifically OpenAI Text Embedding 3 Small) to convert words into vectors. This integration ensures that the algorithm returns the most relevant video given a specific tag while skipping videos already watched using a `watched_videos` dictionary.
 
-## Project Structure
+### 2. AI Search
 
-```markdown
-video_recommender/
-├── __init__.py
-├── chromadb_helper.py
-├── constants.py
-├── main.py
-├── recommender.py
-├── user_actions.py
-├── utils.py
-└── demo.py
-```
+AI Search enhances traditional search functionalities by offering custom playlists or mini video courses based on existing videos in the database. Here's how it functions:
 
-- `chromadb_helper.py`: Functions for initializing and interacting with ChromaDB.
-- `constants.py`: Project-wide constants.
-- `main.py`: Entry point for running the recommender system.
-- `recommender.py`: Core recommendation logic.
-- `user_actions.py`: Functions related to user actions and interest adjustments.
-- `utils.py`: Utility functions, including debugging and printing.
-- `demo.py`: Script to demonstrate the functionality of the recommender system.
+- **Query Processing:** Using POM engineering, the algorithm extracts key details from user queries to generate a curriculum of potential video titles or beginner test cues.
 
-## Setup
+- **Chroma DB Utilization:** Each curriculum bullet is processed through Chroma DB to identify the most relevant video based on vector embeddings, ensuring precise content retrieval.
 
-### Prerequisites
+### 3. AI Quiz Generation
 
-- Python 3.11
-- Pandas
-- ChromaDB
-- OpenAI API Key
+The AI Quiz feature dynamically generates multiple-choice questions from video transcripts, offering an interactive learning experience. Here's a breakdown:
 
-### Installation
+- **Question Generation:** Utilizing OpenAI's API, the feature creates quiz questions directly from the video content.
 
-1. **Clone the repository**:
+- **Answer Formatting:** The generated questions include four possible answers, with one correct answer and three incorrect answers formatted as '~ Answer 1 ~ Answer 2 ~ Answer 3 ~ Answer 4'.
 
-    ```sh
-    git clone https://github.com/yourusername/video_recommender.git
-    cd video_recommender
-    ```
+- **Answer Randomization:** Answers are shuffled to ensure a randomized order, enhancing user engagement and learning retention.
 
-2. **Create a virtual environment and activate it**:
+### 4. AI Summary on Timeout
 
-    ```sh
-    python3.11 -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    ```
+This feature provides concise summaries of videos based on user session duration, offering quick insights into watched content. Key features include:
 
-3. **Install the required packages**:
+- **Automatic Summary Generation:** Summaries are pre-generated upon video upload, enabling efficient lookup using hash maps or dictionary operations during user sessions.
 
-    ```sh
-    pip install -r requirements.txt
-    ```
+### 5. Whisper on the Web
 
-4. **Set up your OpenAI API key**:
-    - Replace the placeholder `OPENAI_API_KEY` in your environment or directly in the code.
+Whisper on the Web introduces a microphone button for text input, enhancing user interaction with question-and-answer cards and search functionalities. It facilitates user engagement by allowing voice-based input for searches.
 
-## Usage
+### 6. Revenue Calculation for Stripe Payouts
 
-1. **Run the main script**:
+This feature calculates revenue distributions for Stripe Payouts API via Stripe Connect -> content creators based on Edgur's monthly revenue, inspired by models like Spotify's stream shares. It integrates business operations with revenue tracking and vendor payouts, ensuring transparent and efficient financial management.
 
-    ```sh
-    python main.py
-    ```
-
-2. **Simulation**:
-    - The main script runs a simulation that demonstrates the video recommendation process based on predefined user interests and actions.
-
-## Configuration
-
-- **Modify user interests**:
-  - Edit the `user_interests` list in `main.py` to include your interests.
-
-- **Adjust constants**:
-  - Modify constants in `constants.py` to fine-tune the recommendation algorithm.
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes.
-4. Commit your changes (`git commit -am 'Add new feature'`).
-5. Push to the branch (`git push origin feature-branch`).
-6. Create a new Pull Request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For questions, please contact [Carl Kho](mailto:kho@uni.minerva.edu).
